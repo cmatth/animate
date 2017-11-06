@@ -18,7 +18,7 @@ def animate(i):
 	ax1.clear()
 	ax1.bar(dataX, dataY)
 
-def buildPlayerReport(playerData):
+def buildReport(playerData):
 	dataX = range(0,max(playerData)+1)
 	dataY = [0] * (max(playerData)+1)
 	for pWorth in playerData:
