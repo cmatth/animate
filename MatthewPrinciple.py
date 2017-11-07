@@ -18,14 +18,14 @@ import random
 ## Runtime Variables ###
 numberPlayers = 1000 	# number of players
 startingCash  = 10 		# $ players start with
-proportion = 3  		# 1 / n player trade each round.
+proportion = 2  		# 1 / n player trade each round.
 frame_rate = 50 		#milliseconds
 ########################
 
 def animateTrading(i):
 	global broke, round_num
 	random.shuffle(player_worth)
-	for i in range(0, frequency, 2):
+	for i in range(0, trade_frequency, 2):
 		p = random.randint(0,10000)
 		if p > 5000:
 			if player_worth[i+1] != 0:
@@ -52,13 +52,13 @@ def buildReport(playerData):
 		dataY[pWorth] += 1
 	return dataX, dataY
 
-fig = plt.figure()
+fig = plt.figure(num='The Matthew Principle')
 ax1 = fig.add_subplot(1,1,1)
 player_worth = [startingCash] * numberPlayers
 dataX = range(0,max(player_worth)+1)
 dataY = [0] * (max(player_worth) + 1)
 
-frequency = int(len(player_worth) / proportion)
+trade_frequency = int(len(player_worth) / proportion)
 round_num = 1
 
 ani = animation.FuncAnimation(fig, animateTrading, 25, interval=frame_rate)
