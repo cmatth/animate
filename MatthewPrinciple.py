@@ -1,6 +1,6 @@
 # Casey Matthews
 # 11/06/17
-# Random trading game simulation that demonstrates the economic
+# A random trading game simulation that demonstrates the economic
 # phenomenon known as the Matthew Principle. A pool of players
 # are given a fixed amount of capital and are then randomly
 # paired for trading. In each transaction, the player has an
@@ -18,14 +18,14 @@ import random
 ## Runtime Variables ###
 numberPlayers = 1000 	# number of players
 startingCash  = 10 		# $ players start with
-proportion = 4  		# 1 / n player trade each round.
+proportion = 3  		# 1 / n player trade each round.
 frame_rate = 50 		#milliseconds
 ########################
 
 def animateTrading(i):
 	global broke, round_num
 	random.shuffle(player_worth)
-	for i in range(0,len(player_worth) / proportion, 2):
+	for i in range(0, frequency, 2):
 		p = random.randint(0,10000)
 		if p > 5000:
 			if player_worth[i+1] != 0:
@@ -45,9 +45,6 @@ def animateTrading(i):
 	ax1.set_title("Random Trading: Round " + str(round_num))
 	round_num += 1
 
-
-
-
 def buildReport(playerData):
 	dataX = range(0,max(playerData)+1)
 	dataY = [0] * (max(playerData)+1)
@@ -55,13 +52,14 @@ def buildReport(playerData):
 		dataY[pWorth] += 1
 	return dataX, dataY
 
-round_num = 1
-
 fig = plt.figure()
 ax1 = fig.add_subplot(1,1,1)
 player_worth = [startingCash] * numberPlayers
 dataX = range(0,max(player_worth)+1)
 dataY = [0] * (max(player_worth) + 1)
+
+frequency = int(len(player_worth) / proportion)
+round_num = 1
 
 ani = animation.FuncAnimation(fig, animateTrading, 25, interval=frame_rate)
 plt.show()
